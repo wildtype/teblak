@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Teblak</title>
   <script>
-include(src/js/idWords.js)
+include(src/js/dictionaries.js)
   </script>
 </head>
 <body>
@@ -13,19 +13,21 @@ include(src/js/idWords.js)
     <header>
       <select name="lang" id="lang">
         <option value="id">Bahasa Indonesia</option>
+        <option value="jv">Basa Jawa</option>
       </select>
-      <button type="button" onclick="window.location.reload(true)">Restart</button>
+      <button type="button" name="restart">Restart</button>
     </header>
 
     <div class="cell-container">
     </div>
     <div class="status"></div>
 
-    <div class="keyboard-container">
+    <footer>
       <div class="kbrow kb-row-1"></div>
       <div class="kbrow kb-row-2"></div>
       <div class="kbrow kb-row-3"></div>
-    </div>
+      <div class="about"><a href="https://github.com/wildtype/teblak">Source &amp; issues</a></div>
+    </footer>
   </div>
 
   <style>

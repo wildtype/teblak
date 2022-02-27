@@ -3,7 +3,6 @@ class Game {
     this.body = options.body;
     this.container = options.container;
     this.statusElement = options.statusElement;
-    this.selectLangElement = options.selectLangElement;
     this.dictionary = options.dictionary;
     this.word = options.word;
     this.guesses = [];
@@ -57,5 +56,16 @@ class Game {
     }
 
     this.pointer += 1;
+  }
+
+  restart(newChosenWord, newDictionary) {
+    this.finished = false;
+    this.word = newChosenWord;
+    this.dictionary = newDictionary;
+    this.pointer = 0;
+    this.guesses.forEach(guess => {
+      guess.clear();
+    });
+    this.statusElement.textContent = '';
   }
 }

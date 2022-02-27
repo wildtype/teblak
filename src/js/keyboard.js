@@ -51,4 +51,10 @@ class Keyboard {
       }
     });
   }
+
+  clear() {
+    this.buttons.forEach(button => {
+      delete button.dataset.state;
+    });
+  }
 }
