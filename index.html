@@ -312,7 +312,7 @@
         const keys = [
           ["q","w","e","r","t","y","u","i","o","p"],
           ["a","s","d","f","g","h","j","k","l"],
-          ["Enter","z","x","c","v","b","n","m","Backspace"]
+          ["Enter","z","x","c","v","b","n","m","Del"]
         ];
 
         rows.forEach((row, idx) => {
@@ -329,7 +329,7 @@
 
       bindInput(callback) {
         this.buttons.forEach(btn => {
-          const key = btn.name;
+          const key = btn.name === 'Del' ? 'Backspace' : btn.name;
           btn.onclick = () => {
             document.body.dispatchEvent(
               new KeyboardEvent('keydown', { key: key })
