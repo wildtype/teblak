@@ -14,7 +14,7 @@ class Game {
   init() {
     this.guesses = [...Array(6)].map(() => {
       const guess = new Guess({ container: this.container  });
-      guess.render(this.statusElement);
+      guess.render();
       return guess;
     });
   }

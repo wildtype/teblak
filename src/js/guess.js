@@ -118,8 +118,8 @@ class Guess {
   }
 
 
-  render(beforeElement) {
-    this.container.insertBefore(this.element, beforeElement);
+  render() {
+    this.container.appendChild(this.element)
     this.cells.forEach((cell) => {
       cell.render();
     });

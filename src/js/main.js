@@ -1,4 +1,4 @@
-const container = document.querySelector('.container');
+const cellContainer = document.querySelector('.cell-container');
 const statusElement = document.querySelector('.status');
 const selectLangElement = document.querySelector('select#lang');
 
@@ -11,7 +11,7 @@ const chosenWord = window.idWords[Math.floor(Math.random() * window.idWords.leng
 
 const game = window.game = new Game({
   body: document.body,
-  container: container,
+  container: cellContainer,
   statusElement: statusElement,
   selectLangElement: selectLangElement,
   dictionary: window.idWords,
