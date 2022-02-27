@@ -1,0 +1,59 @@
+*{ padding:; margin:0; }
+.container{
+  margin-top: 2em;
+}
+
+.status {
+  margin: 2px;
+  font-family: monospace;
+  text-align: center;
+}
+.guess {
+  display: flex;
+  justify-content: center;
+}
+.cell {
+  border: 2px solid black;
+  padding: 2px 8px;
+  margin: 2px;
+  font-family: monospace;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+[data-state="blank"] {
+  background-color: white;
+  border-color: gray;
+  color: black;
+}
+[data-state="filled"] {
+  background-color: white;
+  border-color: black;
+  color: black;
+}
+[data-state="wrong"] {
+  background-color: gray;
+  border-color: gray;
+  color: white;
+}
+[data-state="present"] {
+  background-color: rgb(201, 180, 88);
+  border-color: rgb(201, 180, 88);
+  color: white;
+}
+[data-state="correct"] {
+  background-color: rgb(106, 170, 100);
+  border-color: rgb(106, 170, 100);
+  color: white;
+}
+
+.kbrow {
+  display: flex;
+  justify-content: center;
+}
+
+.kbrow button {
+  border: none;
+  padding: .8em;
+  margin: .2em;
+  text-transform: uppercase;
+}
