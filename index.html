@@ -165,7 +165,6 @@
           return false;
         }
 
-        console.log('deletable');
         return true;
       }
 
@@ -178,14 +177,12 @@
         }
 
         if (this.pointer >= 0) {
-          console.log('deleting', this.pointer);
           this.word = this.word.slice(0, -1);
           this.cells[this.pointer].content = null;
           this.cells[this.pointer].state = 'blank';
           this.cells[this.pointer].render();
         }
 
-        console.log(this.word);
         return this.pointer;
       }
 
@@ -279,8 +276,6 @@
           return;
         }
 
-        console.log(key, this.pointer);
-
         if (key === 'delete') {
           this.guesses[this.pointer].del();
         } else if (key === 'enter') {
@@ -296,7 +291,6 @@
           return;
 
         if (result === Guess.CORRECT) {
-          console.log('correct!');
           this.finished = true;
           return;
         }
@@ -353,7 +347,11 @@
           const targetButton = this.buttons.find(btn => btn.name === key);
           if (targetButton) {
             if (targetButton.dataset.state) {
-              return;
+              if (targetButton.dataset.state === 'correct')
+                return;
+
+              if (targetButton.dataset.state === 'present' && state === 'wrong')
+                return
             }
 
             targetButton.dataset.state = state;
