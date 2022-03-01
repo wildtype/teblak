@@ -4,11 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Teblak</title>
-  <script>
-include(src/js/dictionaries.js)
-  </script>
 </head>
 <body>
+include(src/dictionaries.html)
   <div class="container">
     <header>
       <select name="lang" id="lang">

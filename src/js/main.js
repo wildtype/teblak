@@ -3,6 +3,16 @@ const statusElement = document.querySelector('.status');
 const restartButton = document.querySelector('button[name="restart"]');
 const selectLanguage = document.querySelector('select#lang');
 
+const dictionaryTemplates = document.querySelectorAll('template.dictionary');
+window.dictionaries = [];
+
+[...dictionaryTemplates].forEach(tmp => {
+  const lang = tmp.dataset.lang;
+  const words = tmp.innerHTML.trim().split(' ');
+
+  window.dictionaries[lang] = words;
+});
+
 const lang = selectLanguage.value;
 const dictionary = window.dictionaries[lang];
 
