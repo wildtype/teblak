@@ -47,6 +47,8 @@ html, body {
   height: 100%;
   font-family: monospace;
   text-align: center;
+  margin: auto;
+  max-width: 720px;
 }
 
 header {
@@ -122,6 +124,7 @@ footer {
   text-transform: uppercase;
   color: black;
   font-size: 16px !important;
+  flex: 1;
 }
 
 button, select {
@@ -144,6 +147,30 @@ button, select {
   </style>
 
   <script>
+class Pubsub {
+  static bind(event, callback) {
+    if (!window.pubSubHandler) {
+      window.pubSubHandler = {};
+    }
+
+    if (!window.pubSubHandler[event]) {
+      window.pubSubHandler[event] = [];
+    }
+
+    window.pubSubHandler[event].push(callback);
+  }
+
+  static dispatchEvent(event, data) {
+    if (
+      window.pubSubHandler &&
+      Array.isArray(window.pubSubHandler[event])
+    ) {
+      window.pubSubHandler[event].forEach((handler) => {
+        handler(data);
+      });
+    }
+  }
+}
 class Cell {
   constructor(options) {
     this.container = options.container;
@@ -329,6 +356,9 @@ class Game {
 
   input(key) {
     if (this.finished) {
+      if (key == 'enter') {
+        Pubsub.dispatchEvent('restart', {});
+      }
       return;
     }
 
@@ -497,6 +527,7 @@ restartButton.addEventListener('click', () => {
   restartButton.blur();
 });
 
+Pubsub.bind('restart', restart);
   </script>
 </body>
 </html>

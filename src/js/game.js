@@ -27,6 +27,9 @@ class Game {
 
   input(key) {
     if (this.finished) {
+      if (key == 'enter') {
+        Pubsub.dispatchEvent('restart', {});
+      }
       return;
     }
 

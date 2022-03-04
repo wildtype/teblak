@@ -61,3 +61,5 @@ restartButton.addEventListener('click', () => {
   restart();
   restartButton.blur();
 });
+
+Pubsub.bind('restart', restart);

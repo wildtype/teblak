@@ -10,6 +10,8 @@ html, body {
   height: 100%;
   font-family: monospace;
   text-align: center;
+  margin: auto;
+  max-width: 720px;
 }
 
 header {
@@ -85,6 +87,7 @@ footer {
   text-transform: uppercase;
   color: black;
   font-size: 16px !important;
+  flex: 1;
 }
 
 button, select {

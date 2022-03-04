@@ -33,6 +33,7 @@ include(src/style.css)
   </style>
 
   <script>
+include(src/js/pubsub.js)
 include(src/js/cell.js)
 include(src/js/guess.js)
 include(src/js/game.js)
