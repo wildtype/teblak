@@ -2,6 +2,9 @@ const cellContainer = document.querySelector('.cell-container');
 const statusElement = document.querySelector('.status');
 const restartButton = document.querySelector('button[name="restart"]');
 const selectLanguage = document.querySelector('select#lang');
+const customGameNum = document.querySelector('input[name="customGameNum"]');
+const customGameButton = document.querySelector('button[name="goCustomGame"]');
+const teblakNumber = document.querySelector('span[name="teblakNumber"]');
 
 const dictionaryTemplates = document.querySelectorAll('template.dictionary');
 window.dictionaries = [];
@@ -16,9 +19,8 @@ window.dictionaries = [];
 const lang = selectLanguage.value;
 const dictionary = window.dictionaries[lang];
 
-const chosenWord = dictionary[
-  Math.floor(Math.random() * dictionary.length)
-];
+const wordNum = Math.floor(Math.random() * dictionary.length);
+const chosenWord = dictionary[wordNum];
 
 const game = window.game = new Game({
   body: document.body,
@@ -40,17 +42,32 @@ keyboard.bindKbEval();
 game.init();
 game.bindInput();
 
-restart = () => {
+window.addEventListener('load', () => {
+  showWordNum(wordNum);
+});
+
+showWordNum = (wordNum) => {
+  teblakNumber.textContent = wordNum;
+};
+
+newGame = (wordNum) => {
   const lang = selectLanguage.value;
   const chosenDictionary = window.dictionaries[lang];
 
-  const newChosenWord = chosenDictionary[
-    Math.floor(Math.random() * chosenDictionary.length)
-  ];
+  const newChosenWord = chosenDictionary[wordNum];
 
   keyboard.clear();
   game.restart(newChosenWord, chosenDictionary);
+  showWordNum(wordNum);
 };
+
+restart = () => {
+  newGame(Math.floor(Math.random() * dictionary.length));
+};
+
+customGame = (wordNum) => {
+  newGame(wordNum);
+}
 
 selectLanguage.addEventListener('change', () => {
   restart();
@@ -63,3 +80,6 @@ restartButton.addEventListener('click', () => {
 });
 
 Pubsub.bind('restart', restart);
+customGameButton.addEventListener('click', () => {
+  customGame(customGameNum.value);
+});
