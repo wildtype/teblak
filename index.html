@@ -15,6 +15,7 @@ abang abrit abyor acung adang adhem adhep agama agung ageng ajang ajeng ambah am
 
   <div class="container">
     <header>
+      <h1>Teblak #<span id=teblakNumber></span></h1>
       <select name="lang" id="lang">
         <option value="id">Bahasa Indonesia</option>
         <option value="jv">Basa Jawa</option>
@@ -30,6 +31,7 @@ abang abrit abyor acung adang adhem adhep agama agung ageng ajang ajeng ambah am
       <div class="kbrow kb-row-1"></div>
       <div class="kbrow kb-row-2"></div>
       <div class="kbrow kb-row-3"></div>
+      <div>Custom game <input type="text" id="customGameNum"> <button type="button" name="goCustomGame">Go</button></div>
       <div class="about"><a href="https://github.com/wildtype/teblak">Source &amp; issues</a></div>
     </footer>
   </div>
@@ -467,6 +469,7 @@ const cellContainer = document.querySelector('.cell-container');
 const statusElement = document.querySelector('.status');
 const restartButton = document.querySelector('button[name="restart"]');
 const selectLanguage = document.querySelector('select#lang');
+const customGameButton = document.querySelector('button[name="goCustomGame"]')
 
 const dictionaryTemplates = document.querySelectorAll('template.dictionary');
 window.dictionaries = [];
@@ -481,9 +484,8 @@ window.dictionaries = [];
 const lang = selectLanguage.value;
 const dictionary = window.dictionaries[lang];
 
-const chosenWord = dictionary[
-  Math.floor(Math.random() * dictionary.length)
-];
+const wordNum = Math.floor(Math.random() * dictionary.length);
+const chosenWord = dictionary[wordNum];
 
 const game = window.game = new Game({
   body: document.body,
@@ -505,17 +507,32 @@ keyboard.bindKbEval();
 game.init();
 game.bindInput();
 
-restart = () => {
+window.addEventListener('load', () => {
+  showWordNum(wordNum);
+});
+
+showWordNum = (wordNum) => {
+  document.getElementById("teblakNumber").textContent = wordNum;
+};
+
+newGame = (wordNum) => {
   const lang = selectLanguage.value;
   const chosenDictionary = window.dictionaries[lang];
 
-  const newChosenWord = chosenDictionary[
-    Math.floor(Math.random() * chosenDictionary.length)
-  ];
+  const newChosenWord = chosenDictionary[wordNum];
 
   keyboard.clear();
   game.restart(newChosenWord, chosenDictionary);
+  showWordNum(wordNum);
 };
+
+restart = () => {
+  newGame(Math.floor(Math.random() * dictionary.length));
+};
+
+customGame = (wordNum) => {
+  newGame(wordNum);
+}
 
 selectLanguage.addEventListener('change', () => {
   restart();
@@ -528,6 +545,11 @@ restartButton.addEventListener('click', () => {
 });
 
 Pubsub.bind('restart', restart);
+customGameButton.addEventListener('click', () => {
+  var customGameNum = document.getElementById("customGameNum").value;
+  customGame(customGameNum);
+});
+
   </script>
 </body>
 </html>
